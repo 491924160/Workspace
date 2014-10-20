@@ -1,0 +1,8 @@
+package crack_interview;
+import java.util.*;
+
+public class pathsum2 {
+	public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> list = new ArrayList<List<Integer>>(); 
+    }
+}

@@ -1,0 +1,42 @@
+package crack_interview;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+public class test1 {
+	public static void main(String[]args){
+		int i = 2, j = 3;
+		System.out.println((int)((double)(i+j)/2 + 0.5));
+		int[] array = {5,7,9,11,13,1,3,4};
+		Point[] points = {new Point(2,3), new Point(3,3), new Point(-5,3)};
+		System.out.println(maxpointsinline.maxPoints(points));
+		String s = "aaaaaaa";
+		Set<String> set = new HashSet<String>();
+		set.add("a");
+		set.add("aa");
+		set.add("aaaaaaaaaaaaaaa");
+		set.add("aaaa");
+		set.add("and");
+		List<String> list = solution.solution(s, set);
+		Iterator<String> iter = list.iterator();
+		while(iter.hasNext())
+			System.out.println(iter.next());
+		System.out.println(compare_anagram.compare_anagram("abdda", "cdaab"));
+	}
+	static int rotate_binarysearch(int[] array){
+		int size = array.length;
+		int low = 0, high = size - 1;
+		while(low < high){
+			int mid = (low + high)/2;
+			if(array[low] > array[mid])
+				high = mid;
+			else low = mid;
+			if(high - low == 1)
+				break;
+			
+		}
+		return array[high];
+	}
+}

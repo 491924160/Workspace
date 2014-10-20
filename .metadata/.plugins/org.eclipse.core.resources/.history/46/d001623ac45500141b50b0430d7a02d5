@@ -1,0 +1,30 @@
+package crack_interview;
+
+public class Partition {
+	public void sort(int[]array){
+		int pivot = array[0];
+		int i = 0, j = array.length - 1;
+		while(i < j){
+			while(j > i){
+				if(array[j] < pivot){
+					array[i++] = array[j];
+					break;
+				}
+				j--;
+			}
+			while(i < j){
+				if(array[i] > pivot){
+					array[j--] = array[i];
+					break;
+				}
+				i++;
+			}
+		}
+		array[j] = pivot;
+	}
+	public static void main(String[]args){
+		int[] array = {10,1,5,1,22,-33};
+		new Partition().sort(array);
+		int i  = 3;
+	}
+}

@@ -1,0 +1,29 @@
+package crack_interview;
+
+public class arraytoBST {
+	public TreeNode buildbst(int[] num, int start, int end){
+		if(start == end)
+			return new TreeNode(num[start]);
+		int mid = (start + end) / 2;
+		TreeNode parent = new TreeNode(num[mid]), left = null, right = null;
+		if(mid > start)
+			left = buildbst(num, start, mid);
+		if(end > mid)
+			right = buildbst(num, mid + 1, end);
+		parent.left = left;
+		parent.right = right;
+		return parent;
+	}
+	
+	  public TreeNode sortedArrayToBST(int[] num) {
+		  int len = num.length;
+		  if(len == 0)
+			  return null;
+		  return buildbst(num, 0, len - 1);
+	  }
+	  public static void main(String[]args){
+		  int[] num = {3, 5, 8};
+		  TreeNode rott = new arraytoBST().sortedArrayToBST(num);
+		  
+	  }
+}

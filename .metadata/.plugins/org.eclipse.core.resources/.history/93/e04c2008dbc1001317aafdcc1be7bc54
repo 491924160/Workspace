@@ -1,0 +1,9 @@
+package test1;
+
+ class Test_0 {
+static class test_1
+{
+	int i;
+	String test;
+}
+}

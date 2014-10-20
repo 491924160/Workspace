@@ -1,0 +1,11 @@
+package crack_interview;
+
+public class PalindromePartitioning {
+	public List<List<String>> partition(String s){
+		List<List<String>> list = new List<List<String>>();
+		if(s == null)
+			return null;
+		if(s.length() <= 1)
+			
+	}
+}

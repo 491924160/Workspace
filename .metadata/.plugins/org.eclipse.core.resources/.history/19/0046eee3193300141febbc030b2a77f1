@@ -1,0 +1,14 @@
+package crack_interview;
+
+import java.util.*;
+public class longest_consecutive_sequence {
+	public int longestConsecutive(int[] num){
+		int len  = num.length;
+		if(len == 0)
+			return 0;
+		if(len == 1)
+			return 1;
+		Set<Integer> set = new HashSet<Integer>();
+		
+	}
+}

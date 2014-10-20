@@ -1,0 +1,59 @@
+package crack_interview;
+import java.util.*;
+public class MINWINDOW {
+	public String minWindow(String S, String T) {
+//        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        Set<Character> set = new HashSet<Character>();
+        char[] array = T.toCharArray();
+        int[] counts = new int[26];
+        Arrays.fill(counts, 0);
+        for(char temp: array){
+            counts[temp - 'A']++;
+            if(!set.contains(temp))
+                set.add(temp);
+        }
+        int counter = 0;
+        int limit = set.size();
+        int prev = 0, len = Integer.MAX_VALUE;
+        for(int i = 0; i < S.length(); i++){
+            if(set.contains(S.charAt(i))){
+                counts[S.charAt(i)-'A']--;
+                if(counts[S.charAt(i)-'A'] == 0)
+                counter++;
+            }else{
+                continue;
+            }
+            if(counter == limit){
+                int k = prev;
+                for(; k <= i; k++){
+                    if(!set.contains(S.charAt(k)))
+                    continue;
+                    else{
+                        if(counts[S.charAt(k)-'A']<0){
+                            counts[S.charAt(k) - 'A']++;
+                        }else{
+                            break;
+                        }
+                    }
+                }
+                if(i - k + 1 <= len)
+                {
+                    len = i - k + 1;
+                    prev = k;
+                }
+            }
+        }
+        if(len == Integer.MAX_VALUE)
+        return new String("");
+        else{
+            return S.substring(prev, prev+ len);
+        }
+    }
+	public static void main(String[]args){
+		String s = "ADOBECODEBANC";
+		String  t = "ABC";
+		System.out.println(new MINWINDOW().minWindow(s, t));
+		
+	}
+	
+}

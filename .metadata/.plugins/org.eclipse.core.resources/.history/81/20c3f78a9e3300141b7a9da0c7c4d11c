@@ -1,0 +1,63 @@
+package crack_interview;
+import java.util.*;
+public class wordladder {
+	public boolean check(char[] str1, char[] str2){
+		int count = 0;
+		int len = str1.length;
+		int i = 0;
+		while(i < len){
+			if(str1[i] != str2[i])
+				count ++;
+			i++;
+		}
+		if(count == 1)
+			return true;
+		else return false;
+	}
+	public int ladderLength(String start, String end, Set<String> dict){
+		Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+		Map<String, Boolean> result = new HashMap<String, Boolean>();
+		for(String str: dict){
+			map.put(str, new HashSet<String>());
+			Set<String> set = map.get(str);
+			result.put(str, false);
+			for(String temp: dict){
+				if(!str.equals(temp) && check(str.toCharArray(), temp.toCharArray())){
+					set.add(temp);
+				}
+			}
+		}
+		if(start.equals(end)){
+			Set<String> temp_set = map.get(start);
+			if(temp_set.isEmpty())
+				return 0;
+			else return 2;
+		}
+		Map<Integer, Set<String>> map1 = new HashMap<Integer, Set<String>>();
+		map1.put(0, map.get(start));
+		result.put(start, true);
+		int count = 0;
+		boolean flag = false;
+		while(true){
+			flag = false;
+			Set<String> temp_set = new HashSet<String>(), org = map1.get(count++);
+			for(String temp_str:org){
+				if(temp_str.equals(end))
+					return count;
+				if(!result.get(temp_str)){
+					flag = true;
+					Set<String> temp_set1 = map.get(temp_str);
+					for(String str1: temp_set1){
+						if(!result.get(str1))
+							temp_set.add(str1);
+					}
+					result.put(temp_str, true);
+				}
+			}
+			map1.put(count,  temp_set);
+			if(!flag)
+				return 0;
+		}
+		
+	}
+}

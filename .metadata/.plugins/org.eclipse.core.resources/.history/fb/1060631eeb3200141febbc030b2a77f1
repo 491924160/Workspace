@@ -1,0 +1,29 @@
+package crack_interview;
+class point{
+	int x;
+	int y;
+	point(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class surrondregion {
+	public static void traverseboard(char[][] board, int x, int y){
+		
+	}
+	public static void solution(char[][] board){
+		int width = board.length;
+		int length = board[0].length;
+		if(width == 0 || length == 0)
+			return;
+		for(int i = 0; i < length; i++){
+			if(board[0][i] == 'o'){
+				
+			}
+			if(board[width - 1][i] == 'o'){
+				
+			}
+		}
+	}
+}

@@ -1,0 +1,45 @@
+package crack_interview;
+
+public class distinct_subsequences {
+	public static int numDistinct(String s, String t){
+		if(s.length() < t.length())
+			return 0;
+		if(s.length() == t.length())
+			return s.equals(t) == true? 1: 0;
+		int[][] array = new int[s.length() + 1][t.length() + 1];
+		array[0][0] = 1;
+		for(int i = 0; i < t.length(); i++)
+			for(int j = i; j < s.length(); j++)
+				for(int m = j; m >=i; m--){
+					if(s.charAt(m) == t.charAt(i)){
+						array[j + 1][i + 1] += array[m ][i];
+				}
+				}
+		return array[s.length()][t.length()];
+	}
+	public static int numDistinct1(String s, String t){
+		if(s.length() < t.length())
+			return 0;
+		int[][] array = new int[s.length() + 1][t.length() + 1];
+		array[0][0] = 1;
+		for(int i = 0; i < s.length(); i++){
+		    array[i+1][0] = 1;
+		}
+		for(int i = 0; i < t.length(); i++)
+			for(int j = i; j < s.length(); j++){
+				array[j+1][i+1] = array[j][i+1] + s.charAt(j) == t.charAt(i)? array[j][i]: 0;
+			}
+//				for(int m = j; m >=i; m--){
+//					if(s.charAt(m) == t.charAt(i)){
+//						array[j + 1][i + 1] += array[m ][i];
+//				}
+		
+				
+//		}
+		return array[s.length()][t.length()];
+	}
+	public static void main(String[]args){
+		String s = "rabbit", t = "rabbbit";
+		System.out.println(distinct_subsequences.numDistinct1(t, s));
+	}
+}

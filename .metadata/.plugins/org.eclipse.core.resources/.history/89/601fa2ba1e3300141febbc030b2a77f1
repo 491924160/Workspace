@@ -1,0 +1,29 @@
+package crack_interview;
+import java.util.*;
+public class wordladder {
+	public boolean check(char[] str1, char[] str2){
+		int count = 0;
+		int len = str1.length;
+		int i = 0;
+		while(i < len){
+			if(str1[i] != str2[i])
+				count ++;
+			i++;
+		}
+		if(count == 1)
+			return true;
+		else return false;
+	}
+	public int ladderLength(String start, String end, Set<String> dict){
+		Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+		for(String str: dict){
+			Set<String> set = map.put(str, new HashSet<String>());
+			for(String temp: dict){
+				if(!str.equals(temp) && check(str.toCharArray(), temp.toCharArray())){
+					set.add(temp);
+				}
+			}
+		}
+		
+	}
+}

@@ -1,0 +1,20 @@
+package crack_interview;
+
+public class InorderFind {
+	public TreeNode rec_find(TreeNode root, int k){
+		if(root == null)
+			return null;
+		TreeNode cur = root, prev = null;
+		while(cur != null){
+			if(cur.val < k){
+				cur = cur.right;
+			}else if(cur.val > k){
+				cur = cur.left;
+			}else{
+				prev = cur;
+				cur = cur.left;
+			}
+		}
+		return prev;
+	}
+}

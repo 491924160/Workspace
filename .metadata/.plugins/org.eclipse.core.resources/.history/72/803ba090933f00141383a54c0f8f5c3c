@@ -1,0 +1,9 @@
+package class_test;
+
+class classtest {
+	class wei{
+		
+		
+	}
+	wei ptr;
+}

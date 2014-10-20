@@ -1,0 +1,48 @@
+package crack_interview;
+
+public class InorderFind {
+	public TreeNode rec_find(TreeNode root, int k){
+		if(root == null)
+			return null;
+		TreeNode cur = root, prev = null;
+		while(cur != null){
+			if(cur.val < k){
+				cur = cur.right;
+			}else if(cur.val > k){
+				cur = cur.left;
+			}else{
+				prev = cur;
+				cur = cur.left;
+			}
+		}
+		return prev;
+	}
+	public TreeNode findSuccessor(TreeNode root, int k){
+		if(root == null)
+			return null;
+		TreeNode cur = root, succ = null;
+		while(cur != null){
+			if(cur.val == k)
+				break;
+			if(cur.val > k){
+				succ = cur;
+				cur = cur.left;
+			}else{
+				cur = cur.right;
+			}
+		}
+		return succ;
+	}
+	public static void main(String[]args){
+		TreeNode root = new TreeNode(10);
+		root.left = new TreeNode(5);
+		root.left.left = new TreeNode(1);
+		root.left.right = new TreeNode(7);
+		root.right = new TreeNode(16);
+		root.right.left = new TreeNode(11);
+		root.right.right = new TreeNode(20);
+		TreeNode temp = null;
+		temp = new InorderFind().findSuccessor(root, 20);
+		
+	}
+}

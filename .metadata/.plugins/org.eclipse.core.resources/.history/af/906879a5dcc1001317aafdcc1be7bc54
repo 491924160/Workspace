@@ -1,0 +1,14 @@
+package test1;
+
+ class Test_0 {
+	 static int i;
+static class test_1
+{
+	static int m=6;
+	String test="asdf";
+	void test()
+	{
+		
+	}
+}
+}

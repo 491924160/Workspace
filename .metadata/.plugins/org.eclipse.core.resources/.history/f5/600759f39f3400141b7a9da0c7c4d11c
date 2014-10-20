@@ -1,0 +1,31 @@
+package crack_interview;
+import java.util.*;
+
+public class pathsum2 {
+	public void checkpath(TreeNode node, int remains, String a, List<List<Integer>> list){
+		if(node == null)
+            return;
+        if(node.left == null && node.right  == null && node.val == remains){
+        	String[] array = a.split(" ");
+        	List<Integer> temp = new ArrayList<Integer>();
+        	for(String str: array){
+        		temp.add(Integer.parseInt(str);
+        	}
+        	list.add(temp);
+        }
+        boolean left = false, right = false;
+        if(node.left != null){
+            checkpath(node.left, remains - node.val, a + node.val + " ", list );
+        }
+        if(node.right != null){
+            checkpath(node.right, remains - node.val, a + node.val + " ", list);
+        }
+       
+	}
+	public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> list = new ArrayList<List<Integer>>(); 
+        if(root == null)
+        	return null;
+        
+    }
+}

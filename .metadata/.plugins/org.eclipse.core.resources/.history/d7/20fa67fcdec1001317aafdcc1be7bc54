@@ -1,0 +1,18 @@
+package test1;
+
+class test1 {
+private int i=5;
+int m=10;
+test1(int k,int h)
+{
+	i=k;
+	m=h;
+}
+}
+class test2 extends test1
+{
+	test2(int h,int m,int i)
+	{
+		super(h,m);
+	}
+}

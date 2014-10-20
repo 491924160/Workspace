@@ -1,0 +1,88 @@
+package crack_interview;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class wordbreak {
+	
+	public  static List<String> wordBreak(String s, Set<String> dict){
+		List<String> list = new ArrayList<String>();
+		boolean  flag = false;
+		for(int i = 0; i < s.length(); i++){
+			String temp = s.substring(0, i + 1);
+			List<String> temp_list = null;
+			if(dict.contains(temp)){
+				flag = true;
+				String substring = s.substring(i + 1, s.length());
+				if(i + 1 < s.length())
+					temp_list = wordBreak(substring, dict);
+				else{
+					list.add(temp);
+					return list;
+				}
+			}
+			if(flag && !temp_list.isEmpty()){
+				Iterator<String> iter = temp_list.iterator();
+				while(iter.hasNext()){
+					String sent = (temp + " " + iter.next()).trim();
+					list.add(sent);
+				}
+				flag = false;
+			}
+		}
+		return list;
+	}
+}
+
+class solution{
+	public static List<String> printstring(Map<Integer, ArrayList> map, int start, String s, String sentence){
+		List<String> outputlist = new ArrayList<String>();
+		for(int i = start; i < s.length(); i++){
+			ArrayList<Integer> list = map.get(i);
+			Iterator<Integer> iter = list.iterator();
+			while(iter.hasNext()){
+				int end = iter.next();
+				String temp = s.substring(i, end);
+				if(i == 0){
+					temp += temp;
+				}else{
+					temp += " " + temp;
+				}
+				if(end < s.length()){
+					List<String> temp_list = printstring(map, end, s, sentence);
+					Iterator<String> temp_iter = temp_list.iterator();
+					while(temp_iter.hasNext()){
+						outputlist.add(temp_iter.next());
+					}
+					
+				}else{
+					outputlist.add(temp);
+				}
+			}
+		}
+		return outputlist;
+	}
+	public static List<String> solution(String s, Set<String> dict){
+		Map<Integer, ArrayList> map = new HashMap<Integer, ArrayList>();
+		for(int i = 0; i < s.length(); i++){
+			map.put(i, new ArrayList<Integer>());
+		}
+		for(int i = s.length(); i >= 0; i--){
+			if(i < s.length() && map.get(i).isEmpty())
+					continue;
+			for(int j = i -1; j >=0; j--){
+				String temp = s.substring(j, i);
+				if(dict.contains(temp)){
+					List<Integer> list = map.get(j);
+					list.add(i);
+				}
+			}
+		}
+		List<String> list = printstring(map, 0, s, "");
+		return list;
+	}
+}

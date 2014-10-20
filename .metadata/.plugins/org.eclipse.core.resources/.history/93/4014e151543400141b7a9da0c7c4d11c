@@ -1,0 +1,54 @@
+package crack_interview;
+class TreeLinkNode {
+    int val;
+      TreeLinkNode left, right, next;
+     TreeLinkNode(int x) { val = x; }
+ }
+public class connectbinarytree {
+	public void connectright(TreeLinkNode node, TreeLinkNode par_right){
+        if(node == null)
+            return;
+        node.next = par_right;
+        TreeLinkNode left = node.left, right = node.right;
+        TreeLinkNode truenode = null;
+        while(par_right != null){
+            if(par_right.left != null || par_right.right != null){
+                truenode = par_right.left != null? par_right.left: par_right.right;
+                break;
+            }else{
+                par_right = par_right.next;
+            }
+        }
+        if(node.right != null){
+            connectright(node.left, node.right);
+            if(truenode != null)
+            connectright(node.right, truenode);
+            else
+            connectright(node.right, null);}
+        else{
+            if(truenode != null)
+            connectright(node.left, truenode);
+            else
+            connectright(node.left, null);
+        }
+    }
+    public void connect(TreeLinkNode root) {
+        if(root == null)
+        return;
+        connectright(root, null);
+    }
+	  public static void main(String[]args){
+		  TreeLinkNode[] array = new TreeLinkNode[8];
+		  for(int i = 0; i < 8; i++){
+			  array[i] = new TreeLinkNode(i);
+		  }
+		  array[0].left = array[1];
+		  array[0].right = array[2];
+		  array[2].right = array[5];
+		  array[1].left = array[3];
+		  array[1].right = array[4];
+		  array[3].left = array[6];
+		  array[5].right = array[7];
+		  new connectbinary
+	  }
+}

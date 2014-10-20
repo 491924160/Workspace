@@ -1,0 +1,38 @@
+package crack_interview;
+
+public class minCut {
+	public static int minCut_1(String s){
+		 int len = s.length();
+	        if(len == 1)
+	            return 0;
+			int[] result = new int[len + 1];
+			result[0] = 0;
+			result[1] = 0;
+			boolean[][] pair = new boolean[len][len];
+			for(int i = 1; i < s.length(); i++){
+				int min = Integer.MAX_VALUE;
+				for(int j = i; j >= 0; j--){
+					if(i == j)
+						pair[j][i] = true;
+				    else{
+				        char prev = s.charAt(j), next = s.charAt(i);
+					if(prev != next){
+						pair[j][i] = false;
+						continue;
+					}
+					if(j == i-1)
+						pair[j][i] = true;
+					else
+						pair[j][i] = pair[j+1][i-1];
+				    }
+					if(pair[j][i] && result[j] + 1 < min){
+						result[i] = result[j] + 1;
+						min = result[j] + 1;
+					}
+						
+				}
+				
+			}
+			return result[len];
+	}
+}

@@ -1,0 +1,14 @@
+package leetcode.problem;
+
+public class EditDistance {
+	 public int minDistance(String word1, String word2) {
+	        int len_1 = word1.length();
+	        int len_2 = word2.length();
+	        int[][] array = new int[len_1][len_2];
+	        for(int i = 0;i < len_2; i++)
+	        	array[0][i] = i;
+	        for(int i = 0;i <len_1; i++)
+	        	array[i][0] = i;
+	        return 0;
+	    }
+}

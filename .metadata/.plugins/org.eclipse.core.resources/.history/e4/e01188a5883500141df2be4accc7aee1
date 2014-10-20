@@ -1,0 +1,32 @@
+package crack_interview;
+
+public class constructBST {
+	public TreeNode createtree(int[] preorder, int[] inorder, int location, int left, int right){
+		if(left == right)
+			return new TreeNode(preorder[location]);
+		TreeNode parent = new TreeNode(preorder[location]);
+		 int root = left;
+		for( ; root <= right; root++){
+			if(inorder[root] == preorder[location])
+				break;
+		}
+		if(root - left > 0){
+			parent.left = createtree(preorder, inorder, location + 1, left, root);
+		}
+		int len = root - left;
+		if(right > root){
+			parent.right = createtree(preorder, inorder, location + len + 1, root + 1, right);
+		}
+		return parent;
+	}
+	 public TreeNode buildTree(int[] preorder, int[] inorder) {
+	      if(preorder.length == 0)
+	    	  return null;
+	      return createtree(preorder, inorder, 0, 0, preorder.length - 1);
+	 }
+	 public static void main(String[] args){
+		 int[] a = {1, 2};
+		 int[] b = {2, 1};
+		 new constructBST().buildTree(a, b);
+	 }
+}

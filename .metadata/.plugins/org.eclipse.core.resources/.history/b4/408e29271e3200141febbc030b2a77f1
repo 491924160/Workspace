@@ -1,0 +1,46 @@
+package crack_interview;
+
+import java.util.*;
+
+class UndirectedNode{
+	int label;
+	List<UndirectedNode> neighbors;
+	UndirectedNode(int x){
+		label = x;
+		neighbors = new ArrayList<UndirectedNode>();
+	}
+	
+}
+public class UndirectedGraphClone {
+	public UndirectedNode cloneGraph(UndirectedNode node){
+		if(node == null)
+			return null;
+		Map<Integer, UndirectedNode> map = new HashMap<Integer, UndirectedNode>();
+		Map<Integer, Boolean> map1 = new HashMap<Integer, Boolean>();
+		Queue<UndirectedNode> queue = new LinkedList<UndirectedNode>();
+		UndirectedNode head = new UndirectedNode(node.label);
+		map.put(node.label, head);
+		Iterator<UndirectedNode> iter = node.neighbors.iterator();
+		while(iter.hasNext()){
+			UndirectedNode temp = iter.next();
+			UndirectedNode temp2 = new UndirectedNode(temp.label);
+			head.neighbors.add(temp2);
+			map.put(temp2.label, temp2);
+			map1.put(temp2.label, false);
+			queue.add(temp);
+		}
+		map1.put(head.label, true);
+		while(!queue.isEmpty()){
+			UndirectedNode temp = queue.poll();
+			Iterator<UndirectedNode> iter = temp.neighbors.iterator();
+			if(map.containsKey(temp.label)){
+				
+			}else{
+				UndirectedNode temp2 = new UndirectedNode(temp.label);
+				
+			}
+				
+		}
+		
+	}
+}

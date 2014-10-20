@@ -1,0 +1,71 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Calculate_result {
+
+	public static void ReadFile(String path) throws IOException {
+		File dir = new File(path);
+		if (dir == null)
+			return;
+		File newfile = new File(path + "\\result.txt");
+		BufferedWriter writer = new BufferedWriter(new FileWriter(newfile));
+		try {
+			if (newfile.exists())
+				newfile.delete();
+			newfile.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String[] files = dir.list();
+		for (String temp : files) {
+			File fileA = new File(path + "\\" + temp);
+			BufferedReader br = null;
+			try {
+				br = new BufferedReader(new FileReader(fileA));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			String line = null;
+			double num_line = 0, total = 0, avg = 0;
+			;
+			while ((line = br.readLine()) != null) {
+				num_line++;
+				char a = line.charAt(0);
+				if (a >= '0' && a <= '9') {
+					String[] res = line.split(",");
+					try {
+						total += Double.parseDouble(res[1]);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+			}
+			avg = total / 2500;
+			DecimalFormat df = new DecimalFormat("0.000");
+			String tempnum = df.format(avg);
+			writer.write(temp + "\tavg:\t" + tempnum + "\ttotal:\t"
+					+ (int) total + "\n");
+			br.close();
+		}
+		writer.close();
+	}
+
+	public static void main(String[] args) {
+		try {
+			ReadFile("C:\\Users\\alienware\\Desktop\\4_10");
+			// ReadFile("C:\\Users\\alienware\\Desktop\\3_150");
+			// ReadFile("C:\\Users\\alienware\\Desktop\\3_200");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

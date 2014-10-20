@@ -1,0 +1,9 @@
+package crack_interview;
+
+public class InorderFind {
+	public TreeNode rec_find(TreeNode root, int k){
+		
+			
+		
+	}
+}

@@ -1,0 +1,33 @@
+package crack_interview;
+
+public class Median {
+	 public double findMedianSortedArrays(int A[], int B[]) {
+         if(A.length > B.length)
+         return findMedianSortedArrays(B, A);
+         if(A.length == 0){
+             if((B.length & 1) == 1){
+                 return B[(B.length - 1)>>1];
+             }else{
+                 return (B[(B.length - 1)>>1]+ B[(B.length - 1)>>1 + 1])/2;
+             }
+         }
+         int len = A.length + B.length;
+         int size = (len - 1)>>1;
+         int l = 0, r = Math.min(A.length - 1, len - 1);
+         while(l < r){
+             int mid = l + (r-l)>>1;
+             if(A[mid] < B[size - mid]){
+                 l = mid;
+             }else if (A[mid] > B[size - mid]){
+                 r = mid;
+             }else
+             break;
+         }
+         if((len & 1) == 1){
+             return Math.max(A[l], B[size - l]);
+         }
+         int A1 = l + 1 < A.length? A[l+1]: Integer.MAX_VALUE:
+         int B1 = size-l + 1 < B.length ? B[size-l + 1]: Integer.MAX_VALUE:
+         return (Math.max(A[l], B[size-l]) + Math.max(A[l+1], B[size-l+1])/2);
+   }
+}

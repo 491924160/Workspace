@@ -1,0 +1,39 @@
+package crack_interview;
+import java.util.*;
+public class wordbreak2 {
+	public static List<String> wordBreak(String s, Set<String> dict){
+	    HashMap<Integer, List<String>> map = new HashMap<Integer, List<String>>();
+	    List<String> first = new ArrayList<String>();
+	    first.add("");
+	    map.put(0, first);
+	    for(int i = 1; i <= s.length(); i++)
+	    {
+	        List<String> temp = new ArrayList<String>();
+	        for(int j = i-1; j >=0; j--){
+	            String str = s.substring(j,i);
+	            if(dict.contains(str)){
+	                for(String prev: map.get(j)){
+	                	if(prev.isEmpty()){
+	                		temp.add(str);
+	                	}else{
+	                		temp.add(prev + " "+ str);
+	                	}
+	                    
+	                }
+	            }
+	        }
+	        map.put(i, temp);
+	    }
+	    return map.get(s.length());
+	}
+	public static void main(String[]args){
+		String s = "catsanddog";
+		String[]dict = {"cat", "cats", "and", "sand", "dog"};
+		Set<String> set = new HashSet<String>();
+		for(String temp: dict)
+			set.add(temp);
+		List<String> list = new wordbreak2().wordBreak(s, set);
+		for(String temp: list)
+			System.out.println(temp);
+	}
+}

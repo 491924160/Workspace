@@ -1,0 +1,26 @@
+package crack_interview;
+  class TreeNode {
+	    int val;
+	      TreeNode left;
+	     TreeNode right;
+	    TreeNode(int x) { val = x; }
+	 }
+public class maxPathSum1 {
+	int max;
+    public int recurseNode(TreeNode node, int total){
+        if(node == null)
+            return 0;
+        int leftmax = recurseNode(node.left, total + node.val);
+        int rightmax = recurseNode(node.right, total + node.val);
+        int ret = Math.max(leftmax+total+node.val, rightmax+ total+ node.val);
+        max = Math.max(ret, leftmax+rightmax+node.val);
+        return ret;
+    }
+    public int maxPathSum(TreeNode root) {
+        max = 0;
+        if(root == null)
+            return 0;
+        recurseNode(root, 0);
+        return max;
+    }
+}
